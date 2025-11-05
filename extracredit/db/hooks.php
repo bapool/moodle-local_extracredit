@@ -24,11 +24,19 @@
  * @copyright  2025 Brian A. Pool, National Trail Local Schools
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_extracredit';
-$plugin->version = 2024110501;
-$plugin->requires = 2023100900; // Moodle 4.3+
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = '1.11';
+$callbacks = array(
+    array(
+        'hook' => 'coursemodule_standard_elements',
+        'callback' => 'local_extracredit_coursemodule_standard_elements',
+    ),
+    array(
+        'hook' => 'coursemodule_definition_after_data',
+        'callback' => 'local_extracredit_coursemodule_definition_after_data',
+    ),
+    array(
+        'hook' => 'coursemodule_edit_post_actions',
+        'callback' => 'local_extracredit_coursemodule_edit_post_actions',
+    ),
+);
