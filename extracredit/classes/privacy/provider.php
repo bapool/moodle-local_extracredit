@@ -15,18 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Extra Credit Plugin 
- *
- * This plugin adds an Extra Credit checkbox to all gradable activities in Moodle.
- * When enabled, the activity's points are marked as extra credit in the gradebook.
+ * Privacy Subsystem implementation for local_extracredit.
  *
  * @package    local_extracredit
- * @copyright  2025 Brian A. Pool, National Trail Local Schools
+ * @copyright  2024 Brian A. Pool, National Trail Local Schools
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+namespace local_extracredit\privacy;
+
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Extra Credit Checkbox';
-$string['extracredit'] = 'Extra credit';
-$string['extracredit_help'] = 'When checked, this activity will be marked as extra credit in the gradebook. Extra credit points are added on top of the course total.';
-$string['privacy:metadata'] = 'The Extra Credit plugin does not store any personal data. It only modifies grade item settings to mark activities as extra credit.';
+/**
+ * Privacy Subsystem for local_extracredit implementing null_provider.
+ *
+ * @copyright  2024 Brian A. Pool, National Trail Local Schools
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return string
+     */
+    public static function get_reason(): string {
+        return 'privacy:metadata';
+    }
+}
